@@ -232,7 +232,7 @@ output "network_security_rules" {
 }
 
 # DRG
-# output "drg_id" {
-#   description = "Dynamic routing gateway ID"
-#   value       = try(one(module.drg[*].drg_id), null)
-# }
+output "drg_id" {
+  description = "Dynamic routing gateway ID"
+  value       = try(one(module.drg[*].drg_id), null)
+}
