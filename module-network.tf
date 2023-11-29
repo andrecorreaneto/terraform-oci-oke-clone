@@ -77,16 +77,23 @@ module "vcn" {
   vcn_name                     = coalesce(var.vcn_name, "oke-${local.state_id}")
 }
 
-module "drg" {
-  count          = var.create_drg || var.drg_id != null ? 1 : 0
-  source         = "github.com/andrecorreaneto/terraform-oci-drg-clone"
-  #source         = "oracle-terraform-modules/drg/oci"
-  #version        = "1.0.3"
-  compartment_id = coalesce(var.network_compartment_id, local.compartment_id)
+# module "drg" {
+#   count          = var.create_drg || var.drg_id != null ? 1 : 0
+#   source         = "github.com/andrecorreaneto/terraform-oci-drg-clone"
+#   #source         = "oracle-terraform-modules/drg/oci"
+#   #version        = "1.0.3"
+#   compartment_id = coalesce(var.network_compartment_id, local.compartment_id)
 
-  drg_id              = var.drg_id # existing DRG ID or null
-  drg_display_name    = coalesce(var.drg_display_name, "oke-${local.state_id}")
-  drg_vcn_attachments = var.drg_attachments
+#   drg_id              = var.drg_id # existing DRG ID or null
+#   drg_display_name    = coalesce(var.drg_display_name, "oke-${local.state_id}")
+#   drg_vcn_attachments = var.drg_attachments
+# }
+
+resource "oci_core_drg_attachment" "these" {
+  count = var.drg_id != null ? 1 : 0
+  drg_id        = var.drg_id
+  vcn_id        = module.vcn.vcn_id
+  display_name  = "${module.vcn.vcn_id}-drg-attachment"
 }
 
 module "network" {
