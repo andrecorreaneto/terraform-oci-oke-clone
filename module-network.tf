@@ -90,10 +90,10 @@ module "vcn" {
 # }
 
 resource "oci_core_drg_attachment" "this" {
-  count = var.drg_id != null ? 1 : 0
+  count = var.create_vcn && var.drg_id != null ? 1 : 0
   drg_id        = var.drg_id
-  vcn_id        = module.vcn.vcn_id
-  display_name  = "${module.vcn.vcn_id}-drg-attachment"
+  vcn_id        = module.vcn[0].vcn_id
+  display_name  = "${module.vcn[0].vcn_id}-drg-attachment"
 }
 
 module "network" {
