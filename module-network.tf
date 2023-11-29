@@ -89,7 +89,7 @@ module "vcn" {
 #   drg_vcn_attachments = var.drg_attachments
 # }
 
-resource "oci_core_drg_attachment" "these" {
+resource "oci_core_drg_attachment" "this" {
   count = var.drg_id != null ? 1 : 0
   drg_id        = var.drg_id
   vcn_id        = module.vcn.vcn_id
