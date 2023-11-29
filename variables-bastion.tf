@@ -90,4 +90,5 @@ variable "bastion_upgrade" {
 
 variable "bastion_compartment_id" {
   type    = string
+  default = null
 }
