@@ -79,7 +79,8 @@ module "vcn" {
 
 module "drg" {
   count          = var.create_drg || var.drg_id != null ? 1 : 0
-  source         = "oracle-terraform-modules/drg/oci"
+  source         = "github.com/andrecorreaneto/terraform-oci-drg-clone"
+  #source         = "oracle-terraform-modules/drg/oci"
   version        = "1.0.3"
   compartment_id = coalesce(var.network_compartment_id, local.compartment_id)
 
