@@ -93,7 +93,7 @@ resource "oci_core_drg_attachment" "this" {
   count = var.create_vcn && var.drg_id != null ? 1 : 0
   drg_id        = var.drg_id
   vcn_id        = module.vcn[0].vcn_id
-  display_name  = "${module.vcn[0].all_attributes["display_name"]}-drg-attachment"
+  display_name  = "${module.vcn[0].vcn_all_attributes["display_name"]}-drg-attachment"
 }
 
 module "network" {
