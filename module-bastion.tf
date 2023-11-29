@@ -43,7 +43,7 @@ module "bastion" {
   count          = var.create_bastion ? 1 : 0
   source         = "./modules/bastion"
   state_id       = local.state_id
-  compartment_id = local.compartment_id
+  compartment_id = var.bastion_compartment_id
 
   # Bastion
   assign_dns          = var.assign_dns

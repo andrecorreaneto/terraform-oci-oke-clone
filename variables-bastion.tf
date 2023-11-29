@@ -87,3 +87,7 @@ variable "bastion_upgrade" {
   description = "Whether to upgrade bastion packages after provisioning."
   type        = bool
 }
+
+variable "bastion_compartment_id" {
+  type    = string
+}
